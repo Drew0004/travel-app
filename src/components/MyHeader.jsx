@@ -3,8 +3,8 @@ import { useState } from 'react'
 const MyHeader = () => {
   return (
     <>
-        <header className='bg-dark py-2'>
-            <h2 className='text-white text-center'>Header</h2>
+        <header className='bg-dark py-4'>
+            <h2 className='text-white text-center'>My Travel App</h2>
         </header>
     </>
   )
