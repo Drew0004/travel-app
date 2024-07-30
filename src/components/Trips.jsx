@@ -1,7 +1,9 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import data from '../assets/storage/data'
 import Day from './Day'
 import getActualDay from '../utils/DateGenerator'
+
+export const AppContext = React.createContext()
 
 const Trips = () => {
 
@@ -9,6 +11,8 @@ const Trips = () => {
 
     return (
         <>
+            <AppContext.Provider value={{trips}}>
+
             {trips.map((elem, index)=>{
                 return(
                     <>
@@ -26,7 +30,8 @@ const Trips = () => {
                         </div>
                     </>
                     )
-            })}
+                })}
+            </AppContext.Provider>
         </>
             
     )
