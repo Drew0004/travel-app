@@ -1,22 +1,20 @@
 import React from 'react';
 import Trips from './components/pages/Trips';
-import Day from './components/pages/Day';
+import Days from './components/pages/Days';
 import Stop from './components/pages/Stop';
 
 const routes = [
     {
         path: '/',
         element: <Trips />,
+    },
+    {
+        path: '/days',
+        element: <Days />,
         children: [
             {
-                path: '/days',
-                element: <Day />,
-                children: [
-                    {
-                        path: ':name',
-                        element: <Stop />
-                    }
-                ]
+                path: ':name',
+                element: <Stop />
             }
         ]
     }
