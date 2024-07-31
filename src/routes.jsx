@@ -9,7 +9,7 @@ const routes = [
         element: <Trips />,
     },
     {
-        path: '/days',
+        path: '/days/:travelName',
         element: <Days />,
         children: [
             {

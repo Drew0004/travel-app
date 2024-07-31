@@ -16,7 +16,7 @@ const Trips = () => {
                         <h3 className='text-white'>Data fine {elem.travelInfo.dateEnd}</h3>
                         <p className='text-white'>Descrizione: {elem.travelInfo.description}</p>
                         <img className='w-25' src={elem.travelInfo.travelImg} alt={elem.travel} />
-                        <Link to={`/days`}>Go to Day</Link>
+                        <Link to={`/days/${elem.travel}`}>Go to Day</Link>
                     </div>
                 ))}
         </>
