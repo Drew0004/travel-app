@@ -1,15 +1,14 @@
-import { useState } from 'react'
-import Trips from './Trips'
+import { useRoutes } from 'react-router-dom';
+import routes from '../routes.jsx';
 
 function App() {
-  return (
-    <>
-      <div className="container">
-        <h2 className='text-center my-2  my-text-try text-white'>I tuoi viaggi:</h2>
-        <Trips/>
-      </div>
-    </>
-  )
+    let element = useRoutes(routes);
+    return(
+        <div className='container'>
+            {element}
+        </div>
+    )
 }
 
-export default App
+export default App;
+
