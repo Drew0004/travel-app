@@ -1,19 +1,18 @@
 import React from 'react';
-import Stop from './Stop';
+import { useLocation } from 'react-router-dom';
 
-const Day = ({ dayIndex, actualDay, stops }) => {
-  return (
-    <div className='text-white'>
-      Day {dayIndex + 1}
-      Data: {actualDay}
-      <div>
-        {stops.map((singleStop, index) => (
-          singleStop.stopDate === actualDay ? <Stop key={index} {...singleStop} /> : null
-        ))}
-      </div>
-    </div>
-  );
-};
+const Day = () => {
+    const location = useLocation();
+    const { trip, dayIndex, actualDay } = location.state;
+
+    return (
+        <div>
+            <h1>Day {dayIndex + 1}</h1>
+            <p>Trip Info: {JSON.stringify(trip)}</p>
+            <p>Actual Day: {actualDay}</p>
+        </div>
+    );
+}
 
 export default Day;
 

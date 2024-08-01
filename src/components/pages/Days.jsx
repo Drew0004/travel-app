@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../App';
-import Day from './Day';
+import { Link } from 'react-router-dom';
 import getActualDay from '../../utils/DateGenerator';
 
 const Days = () => {
@@ -11,12 +11,19 @@ const Days = () => {
             {trips.map((elem, index) => (
                 <li key={index}>
                     {Array(elem.numberOfDays).fill().map((_, dayIndex) => (
-                        <Day
-                            key={dayIndex}
-                            {...elem}
-                            dayIndex={dayIndex}
-                            actualDay={getActualDay(elem.numberOfDays, elem.travelInfo.dateStart, dayIndex)}
-                        />
+                        <div key={dayIndex}>
+                            <h2 className='text-white'>Day {dayIndex + 1}</h2>
+                            <Link 
+                                to={`${dayIndex + 1}`} 
+                                state={{
+                                    trip: elem,
+                                    dayIndex: dayIndex,
+                                    actualDay: getActualDay(elem.numberOfDays, elem.travelInfo.dateStart, dayIndex)
+                                }}
+                            >
+                                Go to Day {dayIndex + 1}
+                            </Link>
+                        </div>
                     ))}
                 </li>
             ))}
@@ -25,3 +32,4 @@ const Days = () => {
 }
 
 export default Days;
+
