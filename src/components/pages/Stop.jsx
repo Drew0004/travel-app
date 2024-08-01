@@ -1,10 +1,11 @@
 import React, {useContext} from 'react'
 
 
-const Stop = ({stopName}) => {
+const Stop = ({singleStop}) => {
+  console.log(singleStop)
   return (
-    <div>
-        ciao: {stopName}
+    <div className='text-white'>
+        Ciao sono la tappa: {singleStop.stopName}
     </div>
   )
 }
