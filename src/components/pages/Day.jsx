@@ -14,7 +14,7 @@ const Day = () => {
   //Dati maps api
   const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY
   const myMapId = process.env.REACT_APP_MAP_ID
-  const position = {lat: 53.54, lng: 10}
+  const position = {lat: 51.503186, lng: -0.119519}
 
   return (
     <APIProvider apiKey={googleMapsApiKey}>
@@ -31,9 +31,13 @@ const Day = () => {
           <div className='text-white'>Sembra non ci siano tappe...</div>
         )}
       </div>
+
       {/* Sezione Mappa */}
-      <div style={{ height: '400px' }}>
-        <Map zoom={9} center={position} mapId={myMapId}>
+      <div className='my-5' style={{ height: '300px' }}>
+        <Map 
+            defaultZoom={10} 
+            defaultCenter={position} 
+            mapId={myMapId}>
             <AdvancedMarker position={position}>
                 <Pin/>
             </AdvancedMarker>
