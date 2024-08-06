@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Stop = ({ singleStop }) => {
 
     const [openInput, setOpenInput] = useState(false)
-    const [updatedStop, setUpdatedStop] = useState(singleStop)
+    
+    const [updatedStop, setUpdatedStop] = useState(()=>{
+        const savedStop = localStorage.getItem(`singleStop-${singleStop.stopName}`)
+        return savedStop ? JSON.parse(savedStop) : singleStop
+    })
+
+    useEffect(()=>{
+        localStorage.setItem(`singleStop-${singleStop.stopName}`, JSON.stringify(updatedStop));
+    }, [updatedStop])
 
     const addNotes = (e) => {
         e.preventDefault()
