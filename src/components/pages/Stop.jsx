@@ -32,6 +32,7 @@ const Stop = ({ singleStop }) => {
         <div className='text-white'>
             <h3>Ciao sono la tappa: {updatedStop.stopName}</h3>
             <h5>Coordinate: {updatedStop.lat}, {updatedStop.lng}</h5>
+            <h6>Ranking: {updatedStop.stopRanking}</h6>
             <button onClick={()=>setOpenInput(!openInput)} className='btn btn-primary my-2'>Aggiungi Nota</button>
             {
                 openInput ? 
@@ -44,9 +45,10 @@ const Stop = ({ singleStop }) => {
             {
                 updatedStop.stopNotes ? <p>Note: {updatedStop.stopNotes}</p> : null
             }
-            {Array.from({length: 5}).map((_, index)=>{
-                return index < updatedStop.stopRanking ? <PiStarFourFill/> : <PiStarFour />
-            })
+            {
+                Array.from({length: 5}).map((_, index)=>{
+                    return index < updatedStop.stopRanking ? <PiStarFourFill key={index}/> : <PiStarFour key={index} />
+                })
             }
         </div>
     );
