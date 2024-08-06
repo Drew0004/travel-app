@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { PiStarFourFill } from "react-icons/pi";
+import { PiStarFour } from "react-icons/pi";
 
 const Stop = ({ singleStop }) => {
 
@@ -41,6 +43,10 @@ const Stop = ({ singleStop }) => {
             }
             {
                 updatedStop.stopNotes ? <p>Note: {updatedStop.stopNotes}</p> : null
+            }
+            {Array.from({length: 5}).map((_, index)=>{
+                return index < updatedStop.stopRanking ? <PiStarFourFill/> : <PiStarFour />
+            })
             }
         </div>
     );
