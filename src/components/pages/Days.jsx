@@ -8,7 +8,6 @@ const Days = () => {
   const { trips } = useContext(AppContext);
   const location = useLocation();
   const { trip } = location.state || {};
-  console.log(trip)
 
   return (
     <ul>

@@ -5,15 +5,29 @@ import { APIProvider, Map, AdvancedMarker, Pin } from '@vis.gl/react-google-maps
 import Stop from './Stop';
 
 const Day = () => {
+    const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+    const myMapId = process.env.REACT_APP_MAP_ID;
     const location = useLocation();
     const { trip, dayIndex, actualDay } = location.state || {};
-    
+
+    const [cityLocation, setCityLocation] = useState(null);
     const [filteredStops, setFilteredStops] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
-    const myMapId = process.env.REACT_APP_MAP_ID;
-    const position = { lat: 51.50072919999999, lng: -0.1246254 };
+    const getCityCoordinates = async () => {
+        const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json`, {
+            params: {
+                address: trip.travel,
+                key: googleMapsApiKey
+            }
+        });
+        const location = response.data.results[0].geometry.location;
+        setCityLocation(location);
+    };
+
+    useEffect(() => {
+        getCityCoordinates();
+    }, [trip.travel]);
 
     useEffect(() => {
         const fetchCoordinates = async () => {
@@ -39,15 +53,17 @@ const Day = () => {
         };
 
         fetchCoordinates();
-    }, [trip.stops.lat, trip.stops.lng]);
+    }, [trip.stops]);
 
-    if (loading) {
+    if (loading || !cityLocation) {
         return (
             <div className='text-white my-5'>
                 <h2>Caricamento...</h2>
             </div>
         );
     }
+
+    const position = { lat: cityLocation.lat, lng: cityLocation.lng };
 
     return (
         <APIProvider apiKey={googleMapsApiKey}>
