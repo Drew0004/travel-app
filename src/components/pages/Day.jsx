@@ -39,7 +39,7 @@ const Day = () => {
         };
 
         fetchCoordinates();
-    }, [trip.stops]);
+    }, [trip.stops.lat, trip.stops.lng]);
 
     if (loading) {
         return (
