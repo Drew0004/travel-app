@@ -5,14 +5,26 @@ import { APIProvider, Map, AdvancedMarker, Pin } from '@vis.gl/react-google-maps
 import Stop from './Stop';
 
 const Day = () => {
+
+    // dati per api di maps
     const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
     const myMapId = process.env.REACT_APP_MAP_ID;
+
+    // recupero dati singolo elemento
     const location = useLocation();
     const { trip, dayIndex, actualDay } = location.state || {};
 
+    // state della posizione della città
     const [cityLocation, setCityLocation] = useState(null);
+
+    // state dell'array di fermate filtrate per giornata
     const [filteredStops, setFilteredStops] = useState([]);
+
+    // loader
     const [loading, setLoading] = useState(true);
+
+    //state di apertutra input
+    const [isInputOpen, setIsInputOpen] = useState(false)
 
     const getCityCoordinates = async () => {
         const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json`, {
@@ -65,8 +77,57 @@ const Day = () => {
 
     const position = { lat: cityLocation.lat, lng: cityLocation.lng };
 
+    const addNewStop = async (e) => {
+        e.preventDefault();
+        
+        const stopName = e.target.stopName.value;
+
+            const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json`, {
+                params: {
+                    address: stopName,
+                    key: googleMapsApiKey
+                }
+            });
+            const location = response.data.results[0].geometry.location;
+
+            const newStop = {
+                stopName: stopName,
+                stopDate: actualDay,
+                stopDescription: e.target.stopDescription.value,
+                stopImg: e.target.stopImg.files[0],
+                stopRanking: '',
+                stopDone: false,
+                stopNotes: '',
+                lat: location?.lat || '',
+                lng: location?.lng || ''
+            };
+
+            setFilteredStops([
+                ...filteredStops,
+                newStop
+            ]);
+
+            setIsInputOpen(false);
+
+    };
+
+
     return (
         <APIProvider apiKey={googleMapsApiKey}>
+            <div>
+                <button className='btn btn-success' onClick={()=> setIsInputOpen(!isInputOpen)}>
+                    Aggiungi Tappa +
+                </button>
+                {
+                    isInputOpen ? 
+                    <form onSubmit={addNewStop}>
+                        <input type="text" name='stopName' placeholder='Inserisci il nome della tappa...'/>
+                        <textarea name="stopDescription" placeholder='Inserisci una descrizione...'></textarea>
+                        <input type="file" name="stopImg"/>
+                        <button className='btn btn-primary'>Aggiungi</button>
+                    </form> : ''
+                }
+            </div>
             <div>
                 <h1 className='text-white'>Day {dayIndex + 1}</h1>
                 <p className='text-white'>Actual Day: {actualDay}</p>
