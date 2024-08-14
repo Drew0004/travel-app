@@ -5,7 +5,6 @@ import { APIProvider, Map, AdvancedMarker, Pin } from '@vis.gl/react-google-maps
 import Stop from './Stop';
 
 const Day = () => {
-
     const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
     const myMapId = process.env.REACT_APP_MAP_ID;
 
@@ -68,38 +67,49 @@ const Day = () => {
 
     const position = { lat: cityLocation.lat, lng: cityLocation.lng };
 
-    const addNewStop = async (e) => {
+    const addNewStop = (e) => {
         e.preventDefault();
         
         const stopName = e.target.stopName.value;
+        const stopImgFile = e.target.stopImg.files[0];
 
-        const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json`, {
-            params: {
-                address: stopName,
-                key: googleMapsApiKey
-            }
-        });
-        const location = response.data.results[0].geometry.location;
+        const reader = new FileReader();
+        reader.onloadend = async () => {
+            const stopImgBase64 = reader.result;
 
-        const newStop = {
-            stopName: stopName,
-            stopDate: actualDay,
-            stopDescription: e.target.stopDescription.value,
-            stopImg: e.target.stopImg.files[0],
-            stopRanking: '',
-            stopDone: false,
-            stopNotes: '',
-            lat: location?.lat || '',
-            lng: location?.lng || ''
+            const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json`, {
+                params: {
+                    address: stopName,
+                    key: googleMapsApiKey
+                }
+            });
+            const location = response.data.results[0].geometry.location;
+
+            const newStop = {
+                stopName: stopName,
+                stopDate: actualDay,
+                stopDescription: e.target.stopDescription.value,
+                stopImg: stopImgBase64, // Base64 string
+                stopRanking: '',
+                stopDone: false,
+                stopNotes: '',
+                lat: location?.lat || '',
+                lng: location?.lng || ''
+            };
+
+            setFilteredStops([
+                ...filteredStops,
+                newStop
+            ]);
+
+            setIsInputOpen(false);
         };
 
-        setFilteredStops([
-            ...filteredStops,
-            newStop
-        ]);
-
-        setIsInputOpen(false);
-
+        if (stopImgFile) {
+            reader.readAsDataURL(stopImgFile);
+        } else {
+            reader.onloadend();
+        }
     };
 
     return (
@@ -148,6 +158,7 @@ const Day = () => {
 };
 
 export default Day;
+
 
 
 
