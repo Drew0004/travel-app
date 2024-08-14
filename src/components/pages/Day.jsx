@@ -6,25 +6,16 @@ import Stop from './Stop';
 
 const Day = () => {
 
-    // dati per api di maps
     const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
     const myMapId = process.env.REACT_APP_MAP_ID;
 
-    // recupero dati singolo elemento
     const location = useLocation();
     const { trip, dayIndex, actualDay } = location.state || {};
 
-    // state della posizione della città
     const [cityLocation, setCityLocation] = useState(null);
-
-    // state dell'array di fermate filtrate per giornata
     const [filteredStops, setFilteredStops] = useState([]);
-
-    // loader
     const [loading, setLoading] = useState(true);
-
-    //state di apertutra input
-    const [isInputOpen, setIsInputOpen] = useState(false)
+    const [isInputOpen, setIsInputOpen] = useState(false);
 
     const getCityCoordinates = async () => {
         const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json`, {
@@ -82,50 +73,49 @@ const Day = () => {
         
         const stopName = e.target.stopName.value;
 
-            const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json`, {
-                params: {
-                    address: stopName,
-                    key: googleMapsApiKey
-                }
-            });
-            const location = response.data.results[0].geometry.location;
+        const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json`, {
+            params: {
+                address: stopName,
+                key: googleMapsApiKey
+            }
+        });
+        const location = response.data.results[0].geometry.location;
 
-            const newStop = {
-                stopName: stopName,
-                stopDate: actualDay,
-                stopDescription: e.target.stopDescription.value,
-                stopImg: e.target.stopImg.files[0],
-                stopRanking: '',
-                stopDone: false,
-                stopNotes: '',
-                lat: location?.lat || '',
-                lng: location?.lng || ''
-            };
+        const newStop = {
+            stopName: stopName,
+            stopDate: actualDay,
+            stopDescription: e.target.stopDescription.value,
+            stopImg: e.target.stopImg.files[0],
+            stopRanking: '',
+            stopDone: false,
+            stopNotes: '',
+            lat: location?.lat || '',
+            lng: location?.lng || ''
+        };
 
-            setFilteredStops([
-                ...filteredStops,
-                newStop
-            ]);
+        setFilteredStops([
+            ...filteredStops,
+            newStop
+        ]);
 
-            setIsInputOpen(false);
+        setIsInputOpen(false);
 
     };
-
 
     return (
         <APIProvider apiKey={googleMapsApiKey}>
             <div>
-                <button className='btn btn-success' onClick={()=> setIsInputOpen(!isInputOpen)}>
+                <button className='btn btn-success' onClick={() => setIsInputOpen(!isInputOpen)}>
                     Aggiungi Tappa +
                 </button>
                 {
-                    isInputOpen ? 
+                    isInputOpen && 
                     <form onSubmit={addNewStop}>
                         <input type="text" name='stopName' placeholder='Inserisci il nome della tappa...'/>
                         <textarea name="stopDescription" placeholder='Inserisci una descrizione...'></textarea>
                         <input type="file" name="stopImg"/>
                         <button className='btn btn-primary'>Aggiungi</button>
-                    </form> : ''
+                    </form>
                 }
             </div>
             <div>
@@ -146,10 +136,10 @@ const Day = () => {
             <div className='my-5' style={{ height: '300px' }}>
                 <Map defaultZoom={12} defaultCenter={position} mapId={myMapId}>
                     {filteredStops.map((singlePin, pinIndex) => (
-                        singlePin.lat && singlePin.lng ?
+                        singlePin.lat && singlePin.lng &&
                             <AdvancedMarker key={pinIndex} position={{ lat: singlePin.lat, lng: singlePin.lng }}>
                                 <Pin />
-                            </AdvancedMarker> : null
+                            </AdvancedMarker>
                     ))}
                 </Map>
             </div>
@@ -158,5 +148,6 @@ const Day = () => {
 };
 
 export default Day;
+
 
 
