@@ -5,17 +5,25 @@ import { APIProvider, Map, AdvancedMarker, Pin } from '@vis.gl/react-google-maps
 import Stop from './Stop';
 
 const Day = () => {
+    // dati api maps
     const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
     const myMapId = process.env.REACT_APP_MAP_ID;
 
+    // dati singolo elemento
     const location = useLocation();
     const { trip, dayIndex, actualDay } = location.state || {};
 
+    // dati coordinate città
     const [cityLocation, setCityLocation] = useState(null);
+    
+    // array di fermate filtrate
     const [filteredStops, setFilteredStops] = useState([]);
+
+    // stati di loader e input
     const [loading, setLoading] = useState(true);
     const [isInputOpen, setIsInputOpen] = useState(false);
 
+    // iniziale sezione API coordinate città
     const getCityCoordinates = async () => {
         const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json`, {
             params: {
@@ -27,10 +35,19 @@ const Day = () => {
         setCityLocation(location);
     };
 
+    // recupero fermate dal localStorage
+    const loadStopsFromLocalStorage = () => {
+        const storedStops = JSON.parse(localStorage.getItem('stops')) || [];
+        // const filtered = storedStops.filter(stop => stop.stopDate === actualDay);
+        setFilteredStops(storedStops);
+    };
+
     useEffect(() => {
         getCityCoordinates();
+        loadStopsFromLocalStorage();
     }, [trip.travel]);
 
+    // sezione API coordinate singola fermata e filtraggio
     useEffect(() => {
         const fetchCoordinates = async () => {
             const stopsWithCoordinates = await Promise.all(trip.stops
@@ -50,13 +67,17 @@ const Day = () => {
                     };
                 })
             );
-            setFilteredStops(stopsWithCoordinates);
+
+            const storedStops = JSON.parse(localStorage.getItem('stops')) || [];
+            const allStops = [...stopsWithCoordinates, ...storedStops.filter(stop => stop.stopDate === actualDay)];
+            setFilteredStops(allStops);
             setLoading(false);
         };
 
         fetchCoordinates();
     }, [trip.stops]);
 
+    // loader
     if (loading || !cityLocation) {
         return (
             <div className='text-white my-5'>
@@ -67,7 +88,8 @@ const Day = () => {
 
     const position = { lat: cityLocation.lat, lng: cityLocation.lng };
 
-    const addNewStop = (e) => {
+    // funzione per aggiungere nuova fermata
+    const addNewStop = async (e) => {
         e.preventDefault();
         
         const stopName = e.target.stopName.value;
@@ -97,10 +119,12 @@ const Day = () => {
                 lng: location?.lng || ''
             };
 
-            setFilteredStops([
-                ...filteredStops,
-                newStop
-            ]);
+            const updatedStops = [...filteredStops, newStop];
+            setFilteredStops(updatedStops);
+
+            // Salva le fermate nel localStorage
+            const allStops = JSON.parse(localStorage.getItem('stops')) || [];
+            localStorage.setItem('stops', JSON.stringify([...allStops, newStop]));
 
             setIsInputOpen(false);
         };
@@ -158,6 +182,7 @@ const Day = () => {
 };
 
 export default Day;
+
 
 
 

@@ -8,6 +8,7 @@ const Stop = ({ singleStop }) => {
         const savedStop = localStorage.getItem(`singleStop-${singleStop.stopName}`);
         return savedStop ? JSON.parse(savedStop) : singleStop;
     });
+    
 
     useEffect(() => {
         localStorage.setItem(`singleStop-${singleStop.stopName}`, JSON.stringify(updatedStop));
