@@ -8,6 +8,7 @@ const Trips = () => {
   return (
     <>
       <h2 className='text-center my-2 my-text-try text-white'>I tuoi viaggi:</h2>
+      <Link to={'/add-new-trip'}>Crea un nuovo Viaggio</Link>
       {trips.map((elem, index) => (
         <div key={index} className='item'>
           <h2 className='text-white'>{elem.travel}</h2>

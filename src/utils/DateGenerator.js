@@ -1,13 +1,16 @@
-import { addDays, format } from 'date-fns';
-
+import { addDays, format, parse } from 'date-fns';
 
 const getActualDay = (numberOfDays, startDate, index) => {
-    const dates = []
-    for(let i = 0; i < numberOfDays; i++){
-        const newDate = addDays((new Date(startDate)).toLocaleDateString('en-GB'), i);
-        dates.push(format(newDate, 'dd/MM/yyyy'));
+    const start = parse(startDate, 'dd/MM/yyyy', new Date());
+    
+    const dates = [];
+    for (let i = 0; i < numberOfDays; i++) {
+        const newDate = addDays(start, i);
+        const formattedDate = format(newDate, 'dd/MM/yyyy');
+        dates.push(formattedDate);
     }
-    return dates[index]
+
+    return dates[index];
 }
 
-export default getActualDay
+export default getActualDay;

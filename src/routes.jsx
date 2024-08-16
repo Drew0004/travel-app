@@ -2,6 +2,7 @@ import React from 'react';
 import Trips from './components/pages/Trips';
 import Days from './components/pages/Days';
 import Day from './components/pages/Day';
+import AddNewTrip from './components/pages/AddNewTrip';
 
 const routes = [
   {
@@ -15,6 +16,10 @@ const routes = [
   {
     path: '/days/:travelName/:dayIndex',
     element: <Day />,
+  },
+  {
+    path: '/add-new-trip',
+    element: <AddNewTrip/>
   }
 ];
 
