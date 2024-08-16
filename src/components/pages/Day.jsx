@@ -112,7 +112,7 @@ const Day = () => {
                 stopDate: actualDay,
                 stopDescription: e.target.stopDescription.value,
                 stopImg: stopImgBase64, // Base64 string
-                stopRanking: '',
+                stopRanking: 0,
                 stopDone: false,
                 stopNotes: '',
                 lat: location?.lat || '',

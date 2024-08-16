@@ -3,6 +3,7 @@ import { PiStarFourFill, PiStarFour } from "react-icons/pi";
 
 const Stop = ({ singleStop }) => {
     const [openInput, setOpenInput] = useState(false);
+    const [rankingInput, setRankingInput] = useState(false)
     
     const [updatedStop, setUpdatedStop] = useState(() => {
         const savedStop = localStorage.getItem(`singleStop-${singleStop.stopName}`);
@@ -28,12 +29,32 @@ const Stop = ({ singleStop }) => {
         }
     };
 
+    const editRanking = (e) =>{
+        e.preventDefault()
+
+        setUpdatedStop({
+            ...singleStop,
+            stopRanking: e.target.stopRanking.value
+        })
+
+        setRankingInput(false)
+    }
+
     return (
         <div className='text-white'>
             {updatedStop.stopImg && <img className='w-25' src={updatedStop.stopImg} alt={updatedStop.stopName} />}
             <h3>Ciao sono la tappa: {updatedStop.stopName}</h3>
             <h5>Coordinate: {updatedStop.lat}, {updatedStop.lng}</h5>
             <h6>Ranking: {updatedStop.stopRanking}</h6>
+            <button onClick={()=> setRankingInput(!rankingInput)} className='btn btn-warning'>Modificia Voto</button>
+            {
+                rankingInput ? 
+                <form onSubmit={editRanking}>
+                    <input type="number" name="stopRanking" defaultValue={updatedStop.stopRanking || 0}/>
+                    <button className='btn btn-secondary'>Invia</button>
+                </form> 
+                : null
+            }
             <button onClick={() => setOpenInput(!openInput)} className='btn btn-primary my-2'>Aggiungi Nota</button>
             {
                 openInput ? 
