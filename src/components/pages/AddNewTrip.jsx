@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { AppContext } from '../App';
 import { format, differenceInDays } from 'date-fns';
+import { useNavigate } from 'react-router-dom';
 
 const AddNewTrip = () => {
     const { trips, setTrips } = useContext(AppContext);
@@ -15,6 +16,8 @@ const AddNewTrip = () => {
         numberOfDays: 0,
         stops: []
     });
+
+    const navigate = useNavigate();
 
     const handleNewTrip = async (e) => {
         e.preventDefault();
@@ -52,6 +55,7 @@ const AddNewTrip = () => {
             const updatedTrips = [...trips, trip];
             setTrips(updatedTrips);
         }
+        navigate('/')
     };
 
     return (
