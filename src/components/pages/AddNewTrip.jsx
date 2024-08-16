@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { AppContext } from '../App';
-import { format } from 'date-fns';
+import { format, differenceInDays } from 'date-fns';
 
 const AddNewTrip = () => {
     const { trips, setTrips } = useContext(AppContext);
@@ -23,6 +23,7 @@ const AddNewTrip = () => {
         const startDate = new Date(dateStart.value);
         const endDate = new Date(dateEnd.value);
 
+        const calculatedNumberOfDays = differenceInDays(endDate, startDate) + 1;
         const trip = {
             travel: travelName.value,
             travelInfo: {
@@ -31,7 +32,7 @@ const AddNewTrip = () => {
                 description: description.value,
                 travelImg: ''
             },
-            numberOfDays: parseInt(numberOfDays.value),
+            numberOfDays: calculatedNumberOfDays,
             stops: []
         };
 
@@ -60,7 +61,6 @@ const AddNewTrip = () => {
             <input type="date" name="dateEnd" required />
             <textarea name="description" placeholder='Descrizione' required></textarea>
             <input type="file" name='travelImg' />
-            <input type="number" name='numberOfDays' placeholder='Numero di giorni' required />
             <button type="submit">Invia</button>
         </form>
     );
