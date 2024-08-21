@@ -19,7 +19,7 @@ function App() {
 
   return (
     <AppContext.Provider value={{ trips, setTrips }}>
-      <div className='container'>
+      <div>
         {element}
       </div>
     </AppContext.Provider>

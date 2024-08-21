@@ -5,5 +5,40 @@ body{
     background-color: rgb(32, 32, 32);
 }
 html{
-    font-family: 'Druk wide bold', 'Poppins';
+    font-family: 'Poppins';
+}
+.my-glassmorph{
+    background: #ffffff1a;
+    backdrop-filter: blur(16px) saturate(120%);
+}
+
+.main-green{
+    color: #EAFFBD;
+}
+.secondary-green{
+    color: #39573B;
+}
+
+.my-main-btn{
+    background-color: #EAFFBD;
+    border-radius: 20px;
+    transition: 0.3s ease-in-out;
+    h6{
+        margin: 0;
+        font-weight: bold;
+        color: #39573B;
+    }
+    &:hover{
+        background-color: #39573B;
+        h6{
+            color: #EAFFBD;
+        }
+    }
+}
+
+.my-landing-bg{
+    background-image: url('/HeroClaim.jpg');
+    min-height: 400px;
+    background-position: 0 40%;
+    background-size: cover;
 }
