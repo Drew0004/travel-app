@@ -2,7 +2,7 @@
 @use "partials/mixins.scss" as *;
 
 body{
-    background-color: rgb(32, 32, 32);
+    background-color: rgb(32, 32, 32, 0.4);
 }
 html{
     font-family: 'Poppins';
@@ -10,6 +10,11 @@ html{
 .my-glassmorph{
     background: #ffffff1a;
     backdrop-filter: blur(16px) saturate(120%);
+}
+
+.my-footer{
+    background-color: #39573B;
+    padding: 60px;
 }
 
 .main-green{
@@ -23,14 +28,14 @@ html{
     background-color: #EAFFBD;
     border-radius: 20px;
     transition: 0.3s ease-in-out;
-    h6{
+    span{
         margin: 0;
         font-weight: bold;
         color: #39573B;
     }
     &:hover{
         background-color: #39573B;
-        h6{
+        span{
             color: #EAFFBD;
         }
     }
@@ -41,4 +46,27 @@ html{
     min-height: 400px;
     background-position: 0 40%;
     background-size: cover;
+}
+
+.single-card{
+    background-size: cover;
+    background-position: center;
+    min-height: 250px;
+    overflow: hidden;
+    position: relative;
+    &::before{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        pointer-events: none;
+        z-index: 1;
+    }
+    & * {
+       position: relative;
+       z-index: 2; 
+    }
 }

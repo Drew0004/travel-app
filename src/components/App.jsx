@@ -2,6 +2,7 @@ import { useRoutes } from 'react-router-dom';
 import routes from '../routes';
 import React, { useState, createContext, useEffect } from 'react';
 import data from '../assets/storage/data';
+import MyFooter from './MyFooter';
 
 export const AppContext = createContext();
 
@@ -22,6 +23,7 @@ function App() {
       <div>
         {element}
       </div>
+      <MyFooter/>
     </AppContext.Provider>
   );
 }

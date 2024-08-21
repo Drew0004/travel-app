@@ -19,25 +19,30 @@ const Trips = () => {
                     di viaggio! Enjoy!
                 </p>
                 <div className="text-center">
-                    <i class="fa-solid fa-arrow-down text-white fs-1 my-5"></i>
+                    <i className="fa-solid fa-arrow-down text-white fs-1 my-5"></i>
                 </div>
             </div>
         </div>
         <div className='container'>
-            <h2 className='text-center my-2 my-text-try text-white'>I tuoi viaggi:</h2>
+            <h2 className='my-5 my-text-try secondary-green fw-bold'>I tuoi viaggi:</h2>
             {trips.map((elem, index) => (
-                <div key={index} className='item'>
-                <h2 className='text-white'>{elem.travel}</h2>
-                <h3 className='text-white'>Data inizio {elem.travelInfo.dateStart}</h3>
-                <h3 className='text-white'>Data fine {elem.travelInfo.dateEnd}</h3>
-                <p className='text-white'>Descrizione: {elem.travelInfo.description}</p>
-                <img className='w-25' src={elem.travelInfo.travelImg} alt={elem.travel} />
-                <Link 
-                    to={`/days/${elem.travel}`}
-                    state={{ 
-                        trip: elem,
-                    }}
-                    >Go to Days</Link>
+                <div key={index} className='single-card my-5 p-5 rounded-5' style={{ backgroundImage: `url(${elem.travelInfo.travelImg})` }}>
+                    <div className="d-flex align-items-center justify-content-between">
+                        <h2 className='text-white display-5 fw-bold text-uppercase'>{elem.travel}</h2>
+                        <h4 className='text-white'>Date: {elem.travelInfo.dateStart} - {elem.travelInfo.dateEnd}</h4>
+                    </div>
+                    <p className='text-white fs-6 w-75 fw-light my-4'>{elem.travelInfo.description}</p>
+                    <div className="text-end">
+                        <Link
+                            className='text-decoration-none my-main-btn px-5 py-2'
+                            to={`/days/${elem.travel}`}
+                            state={{ 
+                                trip: elem,
+                            }}
+                            >
+                            <span>Vedi Viaggio</span>
+                        </Link>
+                    </div>
                 </div>
             ))}
         </div>
