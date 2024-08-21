@@ -17,6 +17,18 @@ html{
     padding: 60px;
 }
 
+.my-fixed{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 5;
+}
+
+.my-padding-top{
+    padding-top: 100px;
+}
+
 .main-green{
     color: #EAFFBD;
 }
@@ -47,6 +59,11 @@ html{
     background-position: 0 40%;
     background-size: cover;
 }
+.my-tripimg-bg{
+    min-height: 400px;
+    background-position: 0 40%;
+    background-size: cover;
+}
 
 .single-card{
     background-size: cover;
@@ -61,7 +78,7 @@ html{
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 0.3);
         pointer-events: none;
         z-index: 1;
     }

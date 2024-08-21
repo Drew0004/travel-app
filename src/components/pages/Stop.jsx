@@ -13,7 +13,6 @@ const Stop = ({ singleStop }) => {
 
     useEffect(() => {
         localStorage.setItem(`singleStop-${singleStop.stopName}`, JSON.stringify(updatedStop));
-        console.log(updatedStop)
     }, [updatedStop]);
 
     const addNotes = (e) => {

@@ -10,7 +10,7 @@ const Trips = () => {
     <div>
         <div className='my-landing-bg'>
             <MyHeader />
-            <div className="container">
+            <div className="container my-padding-top">
                 <h2 className='main-green fw-bold mt-5 mb-4'>La tua App di Viaggi!</h2>
                 <p className='text-white w-50'>
                     Traveller nasce con l’idea di rendere i viaggi più semplici che mai!
