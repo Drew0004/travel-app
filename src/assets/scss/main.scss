@@ -36,6 +36,33 @@ html{
     color: #39573B;
 }
 
+.custom-vh{
+    height: calc(100vh - 154px);
+}
+
+.form-img-background{
+    background-image: url('/FormImg.jpg');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    position: relative;
+    &::before{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+        pointer-events: none;
+        z-index: 1;
+    }
+    & * {
+       position: relative;
+       z-index: 2; 
+    }
+}
+
 .my-main-btn{
     background-color: #EAFFBD;
     border-radius: 20px;
@@ -51,6 +78,28 @@ html{
             color: #EAFFBD;
         }
     }
+}
+.my-secondary-btn{
+    background-color: #39573B;
+    border-radius: 20px;
+    transition: 0.3s ease-in-out;
+    span{
+        margin: 0;
+        font-weight: bold;
+        color: #EAFFBD;
+    }
+    &:hover{
+        background-color: #EAFFBD;
+        span{
+            color: #39573B;
+        }
+    }
+}
+
+.my-label{
+    color: #39573B;
+    font-weight: bold;
+    font-size: 1.2rem;
 }
 
 .my-landing-bg{
