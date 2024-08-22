@@ -69,11 +69,11 @@ const AddNewTrip = () => {
     };
 
     return (
-        <div className="row g-0 vh-100">
+        <div className="row g-0 min-vh-100">
             <div className="col-6 form-img-background d-flex justify-content-center align-items-center p-5">
                 <h1 className='main-green fw-bold'>Aggiungi un nuovo Viaggio alla tua Avventura!</h1>
             </div>
-            <div className="col-6 d-flex justify-content-center align-items-center px-5">
+            <div className="col-6 d-flex justify-content-center align-items-center px-5 my-5">
                 <div className="form-wrapper">
                     <form className='row g-0 p-5' onSubmit={handleNewTrip}>
 
