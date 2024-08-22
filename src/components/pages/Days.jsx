@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { AppContext } from '../App';
 import { Link } from 'react-router-dom';
 import getActualDay from '../../utils/DateGenerator';
@@ -6,9 +6,13 @@ import { useLocation } from 'react-router-dom';
 import MyHeader from '../MyHeader';
 
 const Days = () => {
+    useEffect(()=>{
+      window.scrollTo(0, 0);
+    },[])
   const { trips } = useContext(AppContext);
   const location = useLocation();
   const { trip } = location.state || {};
+  
 
   return (
     <div>

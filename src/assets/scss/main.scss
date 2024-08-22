@@ -27,6 +27,10 @@ html{
     }
 }
 
+.c-pointer{
+    cursor: pointer;
+}
+
 .my-fixed{
     position: fixed;
     left: 0;
@@ -114,8 +118,8 @@ html{
 
 .my-landing-bg{
     background-image: url('/HeroClaim.jpg');
-    min-height: 400px;
-    // height: 100vh;
+    // min-height: 400px;
+    height: 100vh;
     background-position: 0 40%;
     background-size: cover;
 }

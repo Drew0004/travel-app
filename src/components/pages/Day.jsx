@@ -5,6 +5,9 @@ import { APIProvider, Map, AdvancedMarker, Pin } from '@vis.gl/react-google-maps
 import Stop from './Stop';
 
 const Day = () => {
+    useEffect(()=>{
+        window.scrollTo(0, 0);
+      },[])
     // dati api maps
     const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
     const myMapId = process.env.REACT_APP_MAP_ID;
