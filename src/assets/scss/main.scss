@@ -1,12 +1,13 @@
 @use "partials/variables.scss" as *;
 @use "partials/mixins.scss" as *;
 
-// body{
-//     background-color: rgb(32, 32, 32, 0.4);
-// }
+body{
+    background-color: rgb(32, 32, 32, 0.4);
+}
 html{
     font-family: 'Poppins';
 }
+
 .my-glassmorph{
     background: #ffffff1a;
     backdrop-filter: blur(16px) saturate(120%);
@@ -15,6 +16,12 @@ html{
 .my-footer{
     background-color: #39573B;
     padding: 60px;
+}
+
+.form-wrapper{
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .my-input{
