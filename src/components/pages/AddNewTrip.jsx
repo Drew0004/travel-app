@@ -64,9 +64,6 @@ const AddNewTrip = () => {
             };
 
             reader.readAsDataURL(stopImgFile);
-        } else {
-            const updatedTrips = [...trips, trip];
-            setTrips(updatedTrips);
         }
         navigate('/')
     };
@@ -97,6 +94,7 @@ const AddNewTrip = () => {
 
                     <label className='my-label mb-3' htmlFor="travelImg">Immagine</label>
                     <input className='mb-3 form-control rounded-5 my-input' type="file" name='travelImg' required />
+                    {errors.travelImg && <p className="text-danger">{errors.travelImg}</p>}
 
                     <div className="col-12 d-flex justify-content-around align-items-center my-4">
                         <Link className='text-decoration-none my-secondary-btn px-4 py-2' to={'/'}>
