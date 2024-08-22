@@ -1,9 +1,9 @@
 @use "partials/variables.scss" as *;
 @use "partials/mixins.scss" as *;
 
-body{
-    background-color: rgb(32, 32, 32, 0.4);
-}
+// body{
+//     background-color: rgb(32, 32, 32, 0.4);
+// }
 html{
     font-family: 'Poppins';
 }
@@ -15,6 +15,16 @@ html{
 .my-footer{
     background-color: #39573B;
     padding: 60px;
+}
+
+.my-input{
+    border: 2px solid #39573b;
+    transition: 0.4s ease-in-out;
+    &:focus{
+        border: transparent;
+        box-shadow: 0 0 8px rgba(57, 89, 59, 0.6);
+        outline: none;
+    }
 }
 
 .my-fixed{
@@ -105,6 +115,7 @@ html{
 .my-landing-bg{
     background-image: url('/HeroClaim.jpg');
     min-height: 400px;
+    // height: 100vh;
     background-position: 0 40%;
     background-size: cover;
 }
