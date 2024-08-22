@@ -122,7 +122,7 @@ const Day = () => {
             const updatedStops = [...filteredStops, newStop];
             setFilteredStops(updatedStops);
 
-            // Salva le fermate nel localStorage
+            // Salvataggio fermate nel localStorage
             const allStops = JSON.parse(localStorage.getItem('stops')) || [];
             localStorage.setItem('stops', JSON.stringify([...allStops, newStop]));
 

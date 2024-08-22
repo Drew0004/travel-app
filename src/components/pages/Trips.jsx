@@ -2,9 +2,10 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AppContext } from '../App';
 import MyHeader from '../MyHeader'
+import Modal from '../Modal';
 
 const Trips = () => {
-  const { trips } = useContext(AppContext);
+  const { trips, setTrips } = useContext(AppContext);
 
   return (
     <div>
@@ -42,6 +43,8 @@ const Trips = () => {
                             >
                             <span>Vedi Viaggio</span>
                         </Link>
+
+                        <Modal elem= {elem}/>
                     </div>
                 </div>
             ))}
