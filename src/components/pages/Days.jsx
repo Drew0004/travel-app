@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { AppContext } from '../App';
 import { Link } from 'react-router-dom';
 import getActualDay from '../../utils/DateGenerator';
@@ -12,6 +12,15 @@ const Days = () => {
   const { trips } = useContext(AppContext);
   const location = useLocation();
   const { trip } = location.state || {};
+
+  const ref = useRef(null)
+
+  const handleScroll = () =>{
+    if(!ref || !ref.current){
+      return  
+    }
+    ref.current.scrollIntoView({behavior: 'smooth', block: 'center'})
+  }
   
 
   return (
@@ -27,7 +36,7 @@ const Days = () => {
                     {trip.travelInfo.description}
                 </p>
                 <div className="text-center">
-                    <i className="fa-solid fa-arrow-down text-white fs-1 my-5"></i>
+                    <i onClick={handleScroll} className="fa-solid fa-arrow-down text-white fs-1 my-5 c-pointer"></i>
                 </div>
             </div>
         </div>
@@ -35,7 +44,7 @@ const Days = () => {
             <h2 className='my-5 my-text-try secondary-green fw-bold'>Le tue giornate:</h2>
             <div className="row justify-content-between">
                 {Array(trip.numberOfDays).fill().map((_, dayIndex) => (
-                    <div key={dayIndex} className='single-card col-5 rounded-5 p-5 my-4' style={{ backgroundImage: `url(${trip.travelInfo.travelImg})` }}>
+                    <div ref={ref} key={dayIndex} className='single-card col-5 rounded-5 p-5 my-4' style={{ backgroundImage: `url(${trip.travelInfo.travelImg})` }}>
                         <h2 className='text-white fw-bold mb-5'>Day {dayIndex + 1}</h2>
                         <Link
                             className='text-decoration-none my-main-btn px-3 py-2' 
