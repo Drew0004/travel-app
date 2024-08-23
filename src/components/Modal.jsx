@@ -22,8 +22,8 @@ function MyModal({elem}) {
 
   return (
     <>
-      <Button className='ms-3 px-3 rounded-5' variant="warning" onClick={handleShow}>
-        <i className="fa-solid fa-trash text-white"></i>
+      <Button className='ms-3 px-3 rounded-5 my-secondary-btn' style={{ border:'none' }} onClick={handleShow}>
+        <span><i className="fa-solid fa-trash"></i></span>
       </Button>
 
       <Modal show={show} onHide={handleClose}>
