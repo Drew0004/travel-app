@@ -222,8 +222,6 @@ const Day = () => {
                 </div>
             </div>
             <div>
-                <h1 className='text-white'>Day {dayIndex + 1}</h1>
-                <p className='text-white'>Actual Day: {actualDay}</p>
                 {filteredStops.length > 0 ? (
                     filteredStops.map((singleStop, stopIndex) => (
                         <div ref={ref} key={stopIndex}>
@@ -234,17 +232,18 @@ const Day = () => {
                     <div className='text-white'>Sembra non ci siano tappe...</div>
                 )}
             </div>
-
-            {/* Sezione Mappa */}
-            <div className='my-5' style={{ height: '300px' }}>
-                <Map defaultZoom={12} defaultCenter={position} mapId={myMapId}>
-                    {filteredStops.map((singlePin, pinIndex) => (
-                        singlePin.lat && singlePin.lng &&
-                            <AdvancedMarker key={pinIndex} position={{ lat: singlePin.lat, lng: singlePin.lng }}>
-                                <Pin />
-                            </AdvancedMarker>
-                    ))}
-                </Map>
+            <div className="container">
+                {/* Sezione Mappa */}
+                <div className='my-5 overflow-hidden rounded-5' style={{ height: '300px' }}>
+                    <Map defaultZoom={12} defaultCenter={position} mapId={myMapId}>
+                        {filteredStops.map((singlePin, pinIndex) => (
+                            singlePin.lat && singlePin.lng &&
+                                <AdvancedMarker key={pinIndex} position={{ lat: singlePin.lat, lng: singlePin.lng }}>
+                                    <Pin />
+                                </AdvancedMarker>
+                        ))}
+                    </Map>
+                </div>
             </div>
         </APIProvider>
     );

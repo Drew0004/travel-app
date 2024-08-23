@@ -1,9 +1,9 @@
 @use "partials/variables.scss" as *;
 @use "partials/mixins.scss" as *;
 
-body{
-    background-color: rgb(32, 32, 32, 0.4);
-}
+// body{
+//     background-color: rgb(32, 32, 32, 0.4);
+// }
 html{
     font-family: 'Poppins';
 }
@@ -102,8 +102,57 @@ html{
     }
 }
 
+.ranking-btn{
+    border: 1px solid #EAFFBD;
+    background-color: #39573B;
+    border-radius: 20px;
+    transition: 0.3s ease-in-out;
+    span{
+        margin: 0;
+        font-weight: bold;
+        color: #EAFFBD;
+    }
+    &:hover{
+        background-color: #EAFFBD;
+        span{
+            color: #39573b;
+        }
+    }
+}
+
+.border-none{
+    border: none;
+}
+
+.add-note-btn{
+    border: none;
+    background-color: #EAFFBD;
+    border-radius: 20px;
+    transition: 0.3s ease-in-out;
+    span{
+        margin: 0;
+        font-weight: bold;
+        color: #39573B;
+    }
+    &:hover{
+        border: 1px solid #EAFFBD;
+        background-color: transparent;
+        span{
+            color: #EAFFBD;
+        }
+    }
+}
+
+.btn-unstyled{
+    background-color: transparent;
+    border: none;
+}
+
 .main-green-bg{
     background-color: #EAFFBD;
+}
+.secondary-green-bg{
+    background-color: #39573B;
 }
 
 .my-secondary-btn{
