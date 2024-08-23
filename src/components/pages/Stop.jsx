@@ -46,7 +46,7 @@ const Stop = ({ singleStop }) => {
             <div className="row g-0 justify-content-between">
                 <div className="card col-4 rounded-5 secondary-green-bg overflow-hidden border-none">
 
-                    {updatedStop.stopImg && <img className='card-img-top' src={updatedStop.stopImg} alt={updatedStop.stopName} />}
+                    {updatedStop.stopImg && <img className='card-img-top custom-max-height object-fit-cover' src={updatedStop.stopImg} alt={updatedStop.stopName} />}
                     
                     <div className="card-body">
                         <h3 className="card-title main-green fw-bold">{updatedStop.stopName}</h3>
