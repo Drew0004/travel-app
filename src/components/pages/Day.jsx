@@ -4,6 +4,7 @@ import axios from 'axios';
 import { APIProvider, Map, AdvancedMarker, Pin } from '@vis.gl/react-google-maps';
 import Stop from './Stop';
 import MyHeader from '../MyHeader';
+import ValidateStopForm from '../../utils/ValidateStopForm';
 
 const Day = () => {
     useEffect(()=>{
@@ -29,6 +30,8 @@ const Day = () => {
     
     // array di fermate filtrate
     const [filteredStops, setFilteredStops] = useState([]);
+
+    const [errors, setErrors] = useState({});
 
     // stati di loader e input
     const [loading, setLoading] = useState(true);
@@ -102,9 +105,19 @@ const Day = () => {
     // funzione per aggiungere nuova fermata
     const addNewStop = async (e) => {
         e.preventDefault();
+
+        const formData = e.target;
+        const formErrors = ValidateStopForm(formData);
+
+        const { stopName, stopDescription, stopImg } = formData;
+
+        if (Object.keys(formErrors).length > 0) {
+            setErrors(formErrors);
+            return;
+        }
         
-        const stopName = e.target.stopName.value;
         const stopImgFile = e.target.stopImg.files[0];
+
 
         const reader = new FileReader();
         reader.onloadend = async () => {
@@ -112,32 +125,37 @@ const Day = () => {
 
             const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json`, {
                 params: {
-                    address: stopName,
+                    address: stopName.value,
                     key: googleMapsApiKey
                 }
             });
-            const location = response.data.results[0].geometry.location;
+            
+            if (response.data.results && response.data.results.length > 0) {
+                const location = response.data.results[0].geometry.location;
 
-            const newStop = {
-                stopName: stopName,
-                stopDate: actualDay,
-                stopDescription: e.target.stopDescription.value,
-                stopImg: stopImgBase64, // Base64 string
-                stopRanking: 0,
-                stopDone: false,
-                stopNotes: '',
-                lat: location?.lat || '',
-                lng: location?.lng || ''
-            };
+                const newStop = {
+                    stopName: stopName.value,
+                    stopDate: actualDay,
+                    stopDescription: stopDescription.value,
+                    stopImg: stopImgBase64, // Base64 string
+                    stopRanking: 0,
+                    stopDone: false,
+                    stopNotes: '',
+                    lat: location?.lat || '',
+                    lng: location?.lng || ''
+                };
 
-            const updatedStops = [...filteredStops, newStop];
-            setFilteredStops(updatedStops);
+                const updatedStops = [...filteredStops, newStop];
+                setFilteredStops(updatedStops);
 
-            // Salvataggio fermate nel localStorage
-            const allStops = JSON.parse(localStorage.getItem('stops')) || [];
-            localStorage.setItem('stops', JSON.stringify([...allStops, newStop]));
+                // Salvataggio fermate nel localStorage
+                const allStops = JSON.parse(localStorage.getItem('stops')) || [];
+                localStorage.setItem('stops', JSON.stringify([...allStops, newStop]));
 
-            setIsInputOpen(false);
+                setIsInputOpen(false);
+            } else {
+                setErrors({ stopName: "Indirizzo non trovato, per favore verifica l'indirizzo inserito." });
+            }
         };
 
         if (stopImgFile) {
@@ -181,12 +199,15 @@ const Day = () => {
                         <form className='row g-0 p-5' onSubmit={addNewStop}>
                             <label className='my-label mb-3' htmlFor="stopName">Meta</label>
                             <input className='mb-3 rounded-5 px-4 py-2 my-input' type="text" name="stopName" placeholder='Inserisci una meta...' required />
+                            {errors.stopName && <p className="text-danger">{errors.stopName}</p>}
 
                             <label className='my-label mb-3' htmlFor="stopDescription">Descrizione della meta</label>
                             <textarea className='mb-3 rounded-5 px-4 py-2 my-input' name="stopDescription" placeholder='Inserisci una descrizione per la tua meta..' required></textarea>
-                            
+                            {errors.stopDescription && <p className="text-danger">{errors.stopDescription}</p>}
+
                             <label className='my-label mb-3' htmlFor="stopImg">Immagine</label>
                             <input className='mb-3 form-control rounded-5 my-input' type="file" name='stopImg' required />
+                            {errors.stopImg && <p className="text-danger">{errors.stopImg}</p>}
                             
                             <div className="d-flex justify-content-between align-items-center my-4">
                                 <button onClick={()=>{setIsInputOpen(false)}} className='my-secondary-btn px-5 py-2'>
