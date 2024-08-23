@@ -1,13 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
 import { APIProvider, Map, AdvancedMarker, Pin } from '@vis.gl/react-google-maps';
 import Stop from './Stop';
+import MyHeader from '../MyHeader';
 
 const Day = () => {
     useEffect(()=>{
         window.scrollTo(0, 0);
       },[])
+    const ref = useRef(null)
+    const handleScroll = () =>{
+    if(!ref || !ref.current){
+        return  
+    }
+    ref.current.scrollIntoView({behavior: 'smooth', block: 'center'})
+    }
     // dati api maps
     const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
     const myMapId = process.env.REACT_APP_MAP_ID;
@@ -141,26 +149,63 @@ const Day = () => {
 
     return (
         <APIProvider apiKey={googleMapsApiKey}>
-            <div>
-                <button className='btn btn-success' onClick={() => setIsInputOpen(!isInputOpen)}>
-                    Aggiungi Tappa +
-                </button>
-                {
-                    isInputOpen && 
-                    <form onSubmit={addNewStop}>
-                        <input type="text" name='stopName' placeholder='Inserisci il nome della tappa...'/>
-                        <textarea name="stopDescription" placeholder='Inserisci una descrizione...'></textarea>
-                        <input type="file" name="stopImg"/>
-                        <button className='btn btn-primary'>Aggiungi</button>
-                    </form>
-                }
+            {/* sezione claim */}
+            <div className='my-tripimg-bg' style={{ backgroundImage: `url(${trip.travelInfo.travelImg})` }}>
+                <MyHeader />
+                <div className="container my-padding-top">
+                    <div className=" d-flex justify-content-between align-items-center">
+                        <h2 className='main-green fw-bold mt-5 mb-4'>{trip.travel}, Day {dayIndex + 1}</h2>
+                        <h4 className='fw-bold m-0 main-green'>{actualDay}</h4>
+                    </div>
+                    <p className='text-white w-50'>
+                        {trip.travelInfo.description}
+                    </p>
+                    <div className="text-center">
+                        <i onClick={handleScroll} className="fa-solid fa-arrow-down text-white fs-1 my-5 c-pointer"></i>
+                    </div>
+                </div>
+            </div>
+            {/* sezione totale date e aggiunta */}
+            <div className='main-green-bg py-5'>
+                <div className="container d-flex justify-content-between align-items-center">
+                    <h2 className='m-0 fw-bold secondary-green'>Le tue tappe per la giornata: <span className='fs-1 ms-2 mb-0'>{filteredStops.length}</span></h2>
+                    <button className='my-tertiary-btn px-4 py-2' onClick={() => setIsInputOpen(!isInputOpen)}>
+                        <span>Aggiungi Tappa +</span>
+                    </button>
+                </div>
+            </div>
+            <div className="container my-5">
+                <div className='form-wrapper'>
+                    {
+                        isInputOpen && 
+                        <form className='row g-0 p-5' onSubmit={addNewStop}>
+                            <label className='my-label mb-3' htmlFor="stopName">Meta</label>
+                            <input className='mb-3 rounded-5 px-4 py-2 my-input' type="text" name="stopName" placeholder='Inserisci una meta...' required />
+
+                            <label className='my-label mb-3' htmlFor="stopDescription">Descrizione della meta</label>
+                            <textarea className='mb-3 rounded-5 px-4 py-2 my-input' name="stopDescription" placeholder='Inserisci una descrizione per la tua meta..' required></textarea>
+                            
+                            <label className='my-label mb-3' htmlFor="stopImg">Immagine</label>
+                            <input className='mb-3 form-control rounded-5 my-input' type="file" name='stopImg' required />
+                            
+                            <div className="d-flex justify-content-between align-items-center my-4">
+                                <button onClick={()=>{setIsInputOpen(false)}} className='my-secondary-btn px-5 py-2'>
+                                    <span>Annulla</span>
+                                </button>
+                                <button className='my-main-btn px-5 py-2' type="submit"> 
+                                    <span>Aggiungi +</span>
+                                </button>
+                            </div>
+                        </form>
+                    }
+                </div>
             </div>
             <div>
                 <h1 className='text-white'>Day {dayIndex + 1}</h1>
                 <p className='text-white'>Actual Day: {actualDay}</p>
                 {filteredStops.length > 0 ? (
                     filteredStops.map((singleStop, stopIndex) => (
-                        <div key={stopIndex}>
+                        <div ref={ref} key={stopIndex}>
                             <Stop singleStop={singleStop} />
                         </div>
                     ))

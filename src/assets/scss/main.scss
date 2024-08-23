@@ -85,6 +85,7 @@ html{
 }
 
 .my-main-btn{
+    border: none;
     background-color: #EAFFBD;
     border-radius: 20px;
     transition: 0.3s ease-in-out;
@@ -100,7 +101,13 @@ html{
         }
     }
 }
+
+.main-green-bg{
+    background-color: #EAFFBD;
+}
+
 .my-secondary-btn{
+    border: none;
     background-color: #39573B;
     border-radius: 20px;
     transition: 0.3s ease-in-out;
@@ -115,6 +122,25 @@ html{
             color: #39573B;
         }
     }
+}
+
+.my-tertiary-btn{
+    border: 1px solid #39573B;
+    background-color: #EAFFBD;
+    border-radius: 20px;
+    transition: 0.3s ease-in-out;
+    span{
+        margin: 0;
+        font-weight: bold;
+        color: #39573B;
+    }
+    &:hover{
+        background-color: #39573B;
+        span{
+            color: #EAFFBD;
+        }
+    }
+
 }
 
 .my-label{
