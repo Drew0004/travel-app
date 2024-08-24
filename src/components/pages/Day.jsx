@@ -221,28 +221,28 @@ const Day = () => {
                     }
                 </div>
             </div>
-            <div>
-                {filteredStops.length > 0 ? (
-                    filteredStops.map((singleStop, stopIndex) => (
-                        <div ref={ref} key={stopIndex}>
-                            <Stop singleStop={singleStop} />
-                        </div>
-                    ))
-                ) : (
-                    <div className='text-white'>Sembra non ci siano tappe...</div>
-                )}
-            </div>
             <div className="container">
-                {/* Sezione Mappa */}
-                <div className='my-5 overflow-hidden rounded-5' style={{ height: '300px' }}>
-                    <Map defaultZoom={12} defaultCenter={position} mapId={myMapId}>
-                        {filteredStops.map((singlePin, pinIndex) => (
-                            singlePin.lat && singlePin.lng &&
-                                <AdvancedMarker key={pinIndex} position={{ lat: singlePin.lat, lng: singlePin.lng }}>
-                                    <Pin />
-                                </AdvancedMarker>
-                        ))}
-                    </Map>
+                <div ref={ref} className='row g-0 justify-content-between'>
+                    {filteredStops.length > 0 ? (
+                        filteredStops.map((singleStop, stopIndex) => (
+                            <Stop key={stopIndex} singleStop={singleStop} />
+                        ))
+                    ) : (
+                        <div className='text-white'>Sembra non ci siano tappe...</div>
+                    )}
+                </div>
+                <div className="container">
+                    {/* Sezione Mappa */}
+                    <div className='my-5 overflow-hidden rounded-5' style={{ height: '300px' }}>
+                        <Map defaultZoom={12} defaultCenter={position} mapId={myMapId}>
+                            {filteredStops.map((singlePin, pinIndex) => (
+                                singlePin.lat && singlePin.lng &&
+                                    <AdvancedMarker key={pinIndex} position={{ lat: singlePin.lat, lng: singlePin.lng }}>
+                                        <Pin />
+                                    </AdvancedMarker>
+                            ))}
+                        </Map>
+                    </div>
                 </div>
             </div>
         </APIProvider>

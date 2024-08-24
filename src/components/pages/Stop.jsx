@@ -42,53 +42,49 @@ const Stop = ({ singleStop }) => {
     };
 
     return (
-        <div className='container'>
-            <div className="row g-0 justify-content-between">
-                <div className="card col-4 rounded-5 secondary-green-bg overflow-hidden border-none">
+        <div className="card col-5 rounded-5 secondary-green-bg overflow-hidden border-none">
 
-                    {updatedStop.stopImg && <img className='card-img-top custom-max-height object-fit-cover' src={updatedStop.stopImg} alt={updatedStop.stopName} />}
-                    
-                    <div className="card-body">
-                        <h3 className="card-title main-green fw-bold">{updatedStop.stopName}</h3>
-                        <p className="card-text text-white">{updatedStop.stopDescription}</p>
-                        {updatedStop.stopNotes && <p className='card-text text-white mt-2'>Note: {updatedStop.stopNotes}</p>}
-                        <div>
-                            {
-                                Array.from({ length: 5 }).map((_, index) => (
-                                    index < updatedStop.stopRanking ? <PiStarFourFill className='main-green fs-5' key={index} /> : <PiStarFour className='main-green fs-5' key={index} />
-                                ))
-                            }
-                        </div>
+            {updatedStop.stopImg && <img className='card-img-top custom-max-height object-fit-cover' src={updatedStop.stopImg} alt={updatedStop.stopName} />}
+            
+            <div className="card-body">
+                <h3 className="card-title main-green fw-bold">{updatedStop.stopName}</h3>
+                <p className="card-text text-white">{updatedStop.stopDescription}</p>
+                {updatedStop.stopNotes && <p className='card-text text-white mt-2'>Note: {updatedStop.stopNotes}</p>}
+                <div>
+                    {
+                        Array.from({ length: 5 }).map((_, index) => (
+                            index < updatedStop.stopRanking ? <PiStarFourFill className='main-green fs-5' key={index} /> : <PiStarFour className='main-green fs-5' key={index} />
+                        ))
+                    }
+                </div>
 
-                        <div className="row g-0 justify-content-between align-items-center">
-                            <div className="col-6">
-                                <button onClick={() => setRankingInput(!rankingInput)} className='ranking-btn px-3 py-1 mb-3 my-3'>
-                                    <span>Modifica Voto</span>
-                                </button>
-                                {rankingInput && 
-                                    <form onSubmit={editRanking}>
-                                        <input className='w-50 rounded-5 px-2' style={{ border: 'none' }} type="number" name="stopRanking" defaultValue={updatedStop.stopRanking || 0} min="0" max="5" />
-                                        <button className='btn-unstyled'><i class="fa-solid fa-check main-green"></i></button>
-                                        <button onClick={()=>{setRankingInput(false)}} className='ms-2 btn-unstyled'><i className="fa-solid fa-x main-green"></i></button>
-                                    </form>
-                                }
-                            </div>
-                            <div className="col-6">
-                                <button onClick={() => setOpenInput(!openInput)} className='add-note-btn px-3 py-1 mb-3 my-3'>
-                                    <span>Aggiungi Nota</span>
-                                </button>
-                                {openInput && 
-                                    <form onSubmit={addNotes}>
-                                        <input className='w-50 rounded-5 px-2' style={{ border: 'none' }} type='text' name='note' placeholder='Aggiungi una nota...' />
-                                        <button className='btn-unstyled'><i className="fa-solid fa-check main-green"></i></button>
-                                        <button onClick={()=>{setOpenInput(false)}} className='ms-2 btn-unstyled'><i className="fa-solid fa-x main-green"></i></button>
-                                    </form>
-                                }
-                            </div>
-                        </div>
-
+                <div className="row g-0 justify-content-between align-items-center">
+                    <div className="col-6">
+                        <button onClick={() => setRankingInput(!rankingInput)} className='ranking-btn px-3 py-1 mb-3 my-3'>
+                            <span>Modifica Voto</span>
+                        </button>
+                        {rankingInput && 
+                            <form onSubmit={editRanking}>
+                                <input className='w-50 rounded-5 px-2' style={{ border: 'none' }} type="number" name="stopRanking" defaultValue={updatedStop.stopRanking || 0} min="0" max="5" />
+                                <button className='btn-unstyled'><i className="fa-solid fa-check main-green"></i></button>
+                                <button onClick={()=>{setRankingInput(false)}} className='ms-2 btn-unstyled'><i className="fa-solid fa-x main-green"></i></button>
+                            </form>
+                        }
+                    </div>
+                    <div className="col-6">
+                        <button onClick={() => setOpenInput(!openInput)} className='add-note-btn px-3 py-1 mb-3 my-3'>
+                            <span>Aggiungi Nota</span>
+                        </button>
+                        {openInput && 
+                            <form onSubmit={addNotes}>
+                                <input className='w-50 rounded-5 px-2' style={{ border: 'none' }} type='text' name='note' placeholder='Aggiungi una nota...' />
+                                <button className='btn-unstyled'><i className="fa-solid fa-check main-green"></i></button>
+                                <button onClick={()=>{setOpenInput(false)}} className='ms-2 btn-unstyled'><i className="fa-solid fa-x main-green"></i></button>
+                            </form>
+                        }
                     </div>
                 </div>
+
             </div>
         </div>
     );
