@@ -46,7 +46,7 @@ const Stop = ({ singleStop }) => {
 
             {updatedStop.stopImg && <img className='card-img-top custom-max-height object-fit-cover' src={updatedStop.stopImg} alt={updatedStop.stopName} />}
             
-            <div className="card-body">
+            <div className="card-body p-4">
                 <h3 className="card-title main-green fw-bold">{updatedStop.stopName}</h3>
                 <p className="card-text text-white">{updatedStop.stopDescription}</p>
                 {updatedStop.stopNotes && <p className='card-text text-white mt-2'>Note: {updatedStop.stopNotes}</p>}

@@ -3,11 +3,11 @@ const trips = [
     travel : "London",
     travelInfo: {
           dateStart: "02/10/2025",
-          dateEnd: "06/10/2025",
+          dateEnd: "05/10/2025",
           description: "Londra, capitale del Regno Unito, è una delle città più cosmopolite e storiche al mondo. Situata sul Tamigi, è celebre per monumenti come il Big Ben, il Tower Bridge e Buckingham Palace. Con una ricca offerta culturale, ospita musei di fama mondiale e una vivace scena di teatri, moda e cucina, riflettendo la sua grande diversità culturale.",
           travelImg: "/London.jpg"
       },
-      numberOfDays : 5,
+      numberOfDays : 4,
       stops : [
           {
               stopName : "London-Eye",
@@ -21,16 +21,38 @@ const trips = [
               stopNotes: ""
           },
           {
-              stopName : "Big Ben",
-              stopDate : "03/10/2025",
-              lat: '',
-              lng: '',
-              stopDescription: "Il Big Ben è l'iconico orologio situato alla torre del Parlamento di Londra. Inaugurato nel 1859, è un simbolo riconoscibile della città e del Regno Unito. Spesso usato per rappresentare Londra, il nome Big Ben si riferisce inizialmente alla grande campana all'interno della torre, mentre il vero nome della torre è Elizabeth Tower.",
-              stopImg: "/Big Ben.jpg",
-              stopRanking: 3,
-              stopDone: true,
-              stopNotes: ""
-          }
+            stopName : "Tower Bridge",
+            stopDate : "02/10/2025",
+            lat: '',
+            lng: '',
+            stopDescription: "Il Tower Bridge di Londra è un ponte levatoio e sospeso, costruito in stile neogotico sul Tamigi. Famoso per le sue due torri iconiche e il meccanismo di sollevamento, è uno dei simboli più riconoscibili della città.",
+            stopImg: "/TowerBridge.jpg",
+            stopRanking: 1,
+            stopDone: false,
+            stopNotes: ""
+        },
+        {
+            stopName : "Big Ben",
+            stopDate : "03/10/2025",
+            lat: '',
+            lng: '',
+            stopDescription: "Il Big Ben è l'iconico orologio situato alla torre del Parlamento di Londra. Inaugurato nel 1859, è un simbolo riconoscibile della città e del Regno Unito. Spesso usato per rappresentare Londra, il nome Big Ben si riferisce inizialmente alla grande campana all'interno della torre, mentre il vero nome della torre è Elizabeth Tower.",
+            stopImg: "/Big Ben.jpg",
+            stopRanking: 3,
+            stopDone: true,
+            stopNotes: ""
+        },
+        {
+            stopName : "National Gallery",
+            stopDate : "04/10/2025",
+            lat: '',
+            lng: '',
+            stopDescription: "La National Gallery di Londra è un celebre museo d'arte situato a Trafalgar Square. Fondata nel 1824, ospita una vasta collezione di dipinti dal XIII al XIX secolo, con opere di maestri come Van Gogh, Da Vinci e Turner.",
+            stopImg: "/NationalGallery.jpg",
+            stopRanking: 1,
+            stopDone: false,
+            stopNotes: ""
+        },
       ]
   },
   {
