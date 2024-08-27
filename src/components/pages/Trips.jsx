@@ -34,31 +34,44 @@ const Trips = () => {
                 </div>
             </div>
         </div>
-        <div className='container'>
-            <h2  className='my-5 my-text-try secondary-green fw-bold'>I tuoi viaggi:</h2>
-            {trips.map((elem, index) => (
-                <div ref={ref} key={index} className='single-card my-5 p-5 rounded-5' style={{ backgroundImage: `url(${elem.travelInfo.travelImg})` }}>
-                    <div className="d-flex align-items-center justify-content-between">
-                        <h2 className='text-white display-5 fw-bold text-uppercase'>{elem.travel}</h2>
-                        <h4 className='text-white'>Date: {elem.travelInfo.dateStart} - {elem.travelInfo.dateEnd}</h4>
-                    </div>
-                    <p className='text-white fs-6 w-75 fw-light my-4'>{elem.travelInfo.description}</p>
-                    <div className="text-end">
-                        <Link
-                            className='text-decoration-none my-main-btn px-5 py-2'
-                            to={`/days/${elem.travel}`}
-                            state={{ 
-                                trip: elem,
-                            }}
-                            >
-                            <span>Vedi Viaggio</span>
-                        </Link>
+        {
+            trips.length !== 0 ?
+            <div className='container'>
+                <h2  className='my-5 my-text-try secondary-green fw-bold'>I tuoi viaggi:</h2>
+                {trips.map((elem, index) => (
+                    <div ref={ref} key={index} className='single-card my-5 p-5 rounded-5' style={{ backgroundImage: `url(${elem.travelInfo.travelImg})` }}>
+                        <div className="d-flex align-items-center justify-content-between">
+                            <h2 className='text-white display-5 fw-bold text-uppercase'>{elem.travel}</h2>
+                            <h4 className='text-white'>Date: {elem.travelInfo.dateStart} - {elem.travelInfo.dateEnd}</h4>
+                        </div>
+                        <p className='text-white fs-6 w-75 fw-light my-4'>{elem.travelInfo.description}</p>
+                        <div className="text-end">
+                            <Link
+                                className='text-decoration-none my-main-btn px-5 py-2'
+                                to={`/days/${elem.travel}`}
+                                state={{ 
+                                    trip: elem,
+                                }}
+                                >
+                                <span>Vedi Viaggio</span>
+                            </Link>
 
-                        <Modal elem= {elem}/>
+                            <Modal elem= {elem}/>
+                        </div>
+                    </div>
+                ))}
+            </div> :
+            <div className="container">
+                <div ref={ref} className="cta-wrapper p-5 rounded-5 my-5">
+                    <h2 className='fw-bold main-green m-0 text-center'>Inizia subito a pianificare l'avventura dei tuoi sogni, aggiungi un viaggio!</h2>
+                    <div className='text-center mt-5'>
+                        <Link className='text-decoration-none add-note-btn px-5 py-3' to={'/add-new-trip'}>
+                            <span>Aggiungi viaggio +</span>
+                        </Link>
                     </div>
                 </div>
-            ))}
-        </div>
+            </div>
+        }
     </div>
   );
 };
