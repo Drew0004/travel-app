@@ -28,11 +28,11 @@ const Days = () => {
         <div className='my-tripimg-bg' style={{ backgroundImage: `url(${trip.travelInfo.travelImg})` }}>
             <MyHeader />
             <div className="container my-padding-top">
-                <div className=" d-flex justify-content-between align-items-center">
-                    <h2 className='main-green fw-bold mt-5 mb-4'>{trip.travel}</h2>
+                <div className=" d-flex justify-content-between align-items-center my-5">
+                    <h2 className='main-green fw-bold m-0'>{trip.travel}</h2>
                     <h4 className='fw-bold m-0 main-green'>{trip.travelInfo.dateStart} - {trip.travelInfo.dateEnd}</h4>
                 </div>
-                <p className='text-white w-50'>
+                <p className='text-white col-md-8 col-12'>
                     {trip.travelInfo.description}
                 </p>
                 <div className="text-center">
@@ -42,9 +42,9 @@ const Days = () => {
         </div>
         <div className='container'>
             <h2 className='my-5 my-text-try secondary-green fw-bold'>Le tue giornate:</h2>
-            <div className="row justify-content-between">
+            <div className="row g-0 justify-content-between">
                 {Array(trip.numberOfDays).fill().map((_, dayIndex) => (
-                    <div ref={ref} key={dayIndex} className='single-card col-5 rounded-5 p-5 my-4' style={{ backgroundImage: `url(${trip.travelInfo.travelImg})` }}>
+                    <div ref={ref} key={dayIndex} className='single-card col-md-5 col-12 rounded-5 p-5 my-4' style={{ backgroundImage: `url(${trip.travelInfo.travelImg})` }}>
                         <h2 className='text-white fw-bold mb-5'>Day {dayIndex + 1}</h2>
                         <Link
                             className='text-decoration-none my-main-btn px-3 py-2' 
