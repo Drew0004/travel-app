@@ -21,8 +21,8 @@ const Trips = () => {
             <MyHeader />
             <div className="container my-padding-top">
                 <div>
-                    <h1 className='main-green fw-bold mt-5 mb-4 display-1'>La tua App di Viaggi!</h1>
-                    <p className='text-white w-50 fs-4'>
+                    <h1 className='main-green text-center fw-bold mt-5 mb-4 title-text-sm title-text-lg'>La tua App di Viaggi!</h1>
+                    <p className='text-white text-center p-text-sm p-text-lg'>
                         Traveller nasce con l’idea di rendere i viaggi più semplici che mai!
                         Aggiungi un viaggio, imposta le giornate, aggiungi delle tappe o
                         punti d’interesse in modo da tenere traccia del tuo digitale diario
@@ -40,9 +40,9 @@ const Trips = () => {
                 <h2  className='my-5 my-text-try secondary-green fw-bold'>I tuoi viaggi:</h2>
                 {trips.map((elem, index) => (
                     <div ref={ref} key={index} className='single-card my-5 p-5 rounded-5' style={{ backgroundImage: `url(${elem.travelInfo.travelImg})` }}>
-                        <div className="d-flex align-items-center justify-content-between">
-                            <h2 className='text-white display-5 fw-bold text-uppercase'>{elem.travel}</h2>
-                            <h4 className='text-white'>Date: {elem.travelInfo.dateStart} - {elem.travelInfo.dateEnd}</h4>
+                        <div className="row g-0 align-items-center justify-content-between">
+                            <h2 className='col-lg-6 col-12 text-white fw-bold text-uppercase'>{elem.travel}</h2>
+                            <h4 className='text-white col-lg-auto col-12'>Date: {elem.travelInfo.dateStart} - {elem.travelInfo.dateEnd}</h4>
                         </div>
                         <p className='text-white fs-6 w-75 fw-light my-4'>{elem.travelInfo.description}</p>
                         <div className="text-end">

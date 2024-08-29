@@ -241,3 +241,29 @@ html{
 .cta-wrapper{
     background-color: #39573b;
 }
+
+// small phone
+@media screen and (min-width: 480px){
+    .title-text-sm{
+        font-size: 2rem;
+    }
+    .p-text-sm{
+        font-size: 1rem;
+    }
+
+}
+
+// tablet
+@media screen and (min-width: 768px){
+    .title-text-lg{
+        font-size: 3rem;
+    }
+    .p-text-lg{
+        font-size: 1.6rem;
+    }
+}
+
+// desktop
+// @media only screen and (min-width: 992px) {
+
+// }
