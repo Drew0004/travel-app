@@ -44,7 +44,9 @@ const Trips = () => {
                             <h2 className='col-lg-6 col-12 text-white fw-bold text-uppercase'>{elem.travel}</h2>
                             <h4 className='text-white col-lg-auto col-12'>Date: {elem.travelInfo.dateStart} - {elem.travelInfo.dateEnd}</h4>
                         </div>
-                        <p className='text-white fs-6 w-75 fw-light my-4'>{elem.travelInfo.description}</p>
+                        <div className='custom-scroll my-4'>
+                            <p className='text-white fs-6 w-75 fw-light'>{elem.travelInfo.description}</p>
+                        </div>
                         <div className="text-end">
                             <Link
                                 className='text-decoration-none my-main-btn px-5 py-2'
