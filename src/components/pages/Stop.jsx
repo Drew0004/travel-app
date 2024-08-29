@@ -42,7 +42,7 @@ const Stop = ({ singleStop }) => {
     };
 
     return (
-        <div className="card col-5 rounded-5 secondary-green-bg overflow-hidden border-none">
+        <div className="card col-lg-5 col-12 my-5 my-md-3 m-lg-0 rounded-5 secondary-green-bg overflow-hidden border-none">
 
             {updatedStop.stopImg && <img className='card-img-top custom-max-height object-fit-cover' src={updatedStop.stopImg} alt={updatedStop.stopName} />}
             
