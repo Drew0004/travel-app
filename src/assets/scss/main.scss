@@ -245,6 +245,18 @@ html{
 .custom-arrow{
     font-size: 2.8rem;
 }
+
+.custom-scroll{
+    max-height: 200px;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+        width: 3px;
+        }
+        &::-webkit-scrollbar-thumb {
+        background: #EAFFBD;
+        border-radius: 5px;
+        }
+}
 // small phone
 @media screen and (min-width: 480px){
     .title-text-sm{

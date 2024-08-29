@@ -48,8 +48,10 @@ const Stop = ({ singleStop }) => {
             
             <div className="card-body p-4">
                 <h3 className="card-title main-green fw-bold">{updatedStop.stopName}</h3>
-                <p className="card-text text-white">{updatedStop.stopDescription}</p>
-                {updatedStop.stopNotes && <p className='card-text text-white mt-2'>Note: {updatedStop.stopNotes}</p>}
+                <div className="custom-scroll my-3">
+                    <p className="card-text text-white">{updatedStop.stopDescription}</p>
+                    {updatedStop.stopNotes && <p className='card-text text-white mt-2'>Note: {updatedStop.stopNotes}</p>}
+                </div>
                 <div>
                     {
                         Array.from({ length: 5 }).map((_, index) => (
