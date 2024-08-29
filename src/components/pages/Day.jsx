@@ -171,11 +171,11 @@ const Day = () => {
             <div className='my-tripimg-bg' style={{ backgroundImage: `url(${trip.travelInfo.travelImg})` }}>
                 <MyHeader />
                 <div className="container my-padding-top">
-                    <div className=" d-flex justify-content-between align-items-center">
-                        <h2 className='main-green fw-bold mt-5 mb-4'>{trip.travel}, Day {dayIndex + 1}</h2>
+                    <div className=" d-flex justify-content-between align-items-center my-5">
+                        <h2 className='main-green fw-bold m-0'>{trip.travel}</h2>
                         <h4 className='fw-bold m-0 main-green'>{actualDay}</h4>
                     </div>
-                    <p className='text-white w-50'>
+                    <p className='text-white col-md-8 col-12'>
                         {trip.travelInfo.description}
                     </p>
                     <div className="text-center">
@@ -185,8 +185,8 @@ const Day = () => {
             </div>
             {/* sezione totale date e aggiunta */}
             <div className='main-green-bg py-5'>
-                <div className="container d-flex justify-content-between align-items-center">
-                    <h2 className='m-0 fw-bold secondary-green'>Le tue tappe per la giornata: <span className='fs-1 ms-2 mb-0'>{filteredStops.length}</span></h2>
+                <div className="container d-flex justify-content-between align-items-center flex-wrap">
+                    <h2 className='m-md-0 mb-4 fw-bold secondary-green'>Le tue tappe per la giornata: <span className='fs-1 ms-2 mb-0'>{filteredStops.length}</span></h2>
                     <button className='my-tertiary-btn px-4 py-2' onClick={() => setIsInputOpen(!isInputOpen)}>
                         <span>Aggiungi Tappa +</span>
                     </button>
