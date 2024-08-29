@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import { AppContext } from '../App';
 import { format, differenceInDays } from 'date-fns';
 import { useNavigate, Link } from 'react-router-dom';
@@ -20,6 +20,15 @@ const AddNewTrip = () => {
     });
 
     const navigate = useNavigate();
+
+    const ref = useRef(null)
+
+    const handleScroll = () =>{
+      if(!ref || !ref.current){
+        return  
+      }
+      ref.current.scrollIntoView({behavior: 'smooth', block: 'center'})
+    }
 
     const handleNewTrip = async (e) => {
         e.preventDefault();
@@ -70,11 +79,14 @@ const AddNewTrip = () => {
 
     return (
         <div className="row g-0 min-vh-100">
-            <div className="col-6 form-img-background d-flex justify-content-center align-items-center p-5">
+            <div className="col-12 h-200 col-md-6 form-img-background d-flex justify-content-center align-items-center p-5">
                 <h1 className='main-green fw-bold'>Aggiungi un nuovo Viaggio alla tua Avventura!</h1>
+                <div className="text-center d-md-none d-block">
+                        <i onClick={handleScroll} className="fa-solid fa-arrow-down text-white my-5 ms-5 custom-arrow c-pointer"></i>
+                </div>
             </div>
-            <div className="col-6 d-flex justify-content-center align-items-center px-5 my-5">
-                <div className="form-wrapper">
+            <div className="col-12 col-md-6 d-flex justify-content-center align-items-center px-md-5 px-3 my-5">
+                <div ref={ref} className="form-wrapper">
                     <form className='row g-0 p-5' onSubmit={handleNewTrip}>
 
                         <label className='my-label mb-3' htmlFor="travelName">Nome del Viaggio</label>
