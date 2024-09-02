@@ -15,7 +15,11 @@ function MyModal({elem}) {
   const handleRemoveTrip = (tripName) => {
         const updatedTrips = trips.filter(trip => trip.travel !== tripName);
         setTrips(updatedTrips);
-    
+
+        elem.stops.forEach(stop => {
+          localStorage.removeItem(`singleStop-${stop.stopName}`);
+        });
+
         localStorage.setItem('trips', JSON.stringify(updatedTrips));
         setShow(false)
   };
